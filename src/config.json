@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb+srv://Admin:123@translations-3snqj.mongodb.net/lingvision?retryWrites=true",
+    "secret": "2tgcb"
+}
