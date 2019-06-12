@@ -34,8 +34,8 @@ async function update(wordExerciseUserLinkParamList) {
 
         if (!wordExerciseUserLink) throw 'WordExerciseUserLink is not found, prodBy 2TGCB';
 
-        const newWordWordExerciseUserLink = await wordExerciseUserLink.updateOne(wordExerciseUserLinkParam);
-        result.push(newWordWordExerciseUserLink);
+        await wordExerciseUserLink.updateOne(wordExerciseUserLinkParam);
+        result.push(wordExerciseUserLinkParam);
     }
 
     return result;
