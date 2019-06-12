@@ -1,5 +1,6 @@
 const db = require('../helpers/db');
 const Translation = db.Translation;
+const Word = db.Word;
 const wordService = require('../words/word.service');
 
 module.exports = {
@@ -18,17 +19,28 @@ async function getAll() {
     return await Translation.find();
 }
 
-async function getTranslationListResponse(translationParamList) {
+async function createWordRecord(wordParam) {
+    const [wordRecord] = await Word.find(wordParam);
+
+    if (!wordRecord) {
+        return await wordService.create(wordParam);
+    }
+
+    return wordRecord;
+}
+
+async function create(translationParamList) {
     let result = [];
 
     for(let i=0; i < translationParamList.length; i++) {
-        const {word1, word2} = translationParamList[i];
-        const wordRecord1 = await wordService.create(word1);
-        const wordRecord2 = await wordService.create(word2);
+        const {word1: wordParam1, word2: wordParam2} = translationParamList[i];
+        const wordRecord1 = await createWordRecord(wordParam1);
+        const wordRecord2 = await createWordRecord(wordParam2);
         const translationParam = {
             wordId1: wordRecord1.id,
             wordId2: wordRecord2.id,
         };
+
         const translationEntity = new Translation(translationParam);
         const translationRecord = await translationEntity.save();
 
@@ -42,11 +54,6 @@ async function getTranslationListResponse(translationParamList) {
     }
 
     return result;
-}
-
-async function create(translationParamList) {
-
-    return getTranslationListResponse(translationParamList);
 }
 
 async function update(id, translationParam) {

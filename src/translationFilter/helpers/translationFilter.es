@@ -4,8 +4,6 @@ module.exports = {
     translationListFilter,
 };
     function translationListFilter(translationList, DBTranslationList) {
-        console.log(translationList);
-        console.log(DBTranslationList);
         if (!translationList) {
             return [];
         }
@@ -47,6 +45,6 @@ module.exports = {
 
     function checkDBExistence(DBTranslationList) {
         return function(wordPair) {
-            return existIn(DBTranslationList, wordPair);
+            return !existIn(DBTranslationList, wordPair);
         }
     }
