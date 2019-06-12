@@ -9,7 +9,7 @@ const errorHandler = require('./helpers/error-handler');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
-// app.use(jwt());
+app.use(jwt());
 app.use(errorHandler);
 app.use('/users', require('./users/user.controller'));
 app.use('/translations', require('./translations/translation.controller'));
