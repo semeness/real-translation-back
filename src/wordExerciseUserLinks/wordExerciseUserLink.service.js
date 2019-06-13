@@ -8,8 +8,8 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll() {
-    return await WordExerciseUserLink.find();
+async function getAll(userId) {
+    return await WordExerciseUserLink.find({userId});
 }
 
 async function create(wordExerciseUserLinkParamList) {

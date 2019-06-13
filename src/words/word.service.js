@@ -1,4 +1,5 @@
 const db = require('../helpers/db');
+const userWordLinkService = require('../userWordLinks/userWordLink.service');
 const Word = db.Word;
 module.exports = {
     getById,
@@ -8,8 +9,22 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll() {
-    return await Word.find();
+async function getWordIdFormattedData(userWordLinkList) {
+    return userWordLinkList.reduce((prev, userWordLink) => ({...prev, [userWordLink.wordId]: true}), {});
+}
+
+function wordListFilter(userWordIdData) {
+    return function (word) {
+        return userWordIdData[word.id];
+    }
+}
+
+async function getAll(userId) {
+    const userWordLinkList = await userWordLinkService.getBy({userId});
+    const userWordIdData = await getWordIdFormattedData(userWordLinkList);
+    const wordList = await Word.find();
+
+    return wordList.filter(wordListFilter(userWordIdData));
 }
 
 async function getById(id) {

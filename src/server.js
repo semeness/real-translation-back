@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(jwt());
-app.use(errorHandler);
 app.use('/users', require('./users/user.controller'));
 app.use('/translations', require('./translations/translation.controller'));
 app.use('/words', require('./words/word.controller'));
@@ -18,6 +17,7 @@ app.use('/languages', require('./languages/language.controller'));
 app.use('/exercises', require('./exercises/exercise.controller'));
 app.use('/wordExerciseUserLink', require('./wordExerciseUserLinks/wordExerciseUserLink.controller'));
 app.use('/translationFilter', require('./translationFilter/translationFilter.controller'));
+app.use(errorHandler);
 
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
 const server = app.listen(port, () => {

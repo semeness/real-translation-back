@@ -18,7 +18,7 @@ function create(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    wordService.getAll()
+    wordService.getAll(req.user.sub)
         .then(wordList => res.json(wordList))
         .catch(err => next(err));
 }

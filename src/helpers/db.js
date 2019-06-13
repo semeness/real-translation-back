@@ -6,9 +6,11 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
     Exercise: require('../exercises/exercise.model'),
-    WordExerciseUserLink: require('../wordExerciseUserLinks/wordExerciseUserLink.model'),
     User: require('../users/user.model'),
     Language: require('../languages/language.model'),
     Translation: require('../translations/translation.model'),
+    WordExerciseUserLink: require('../wordExerciseUserLinks/wordExerciseUserLink.model'),
+    UserWordLink: require('../userWordLinks/userWordLink.model'),
+    UserTranslationLink: require('../userTranslationLinks/userTranslationLink.model'),
     Word: require('../words/word.model')
 };

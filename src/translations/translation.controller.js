@@ -13,13 +13,13 @@ module.exports = router;
 
 
 function getAll(req, res, next) {
-    translationService.getAll()
+    translationService.getAll(req.user.sub)
         .then(trnsList => res.json(trnsList))
         .catch(err => next(err));
 }
 
 function create(req, res, next) {
-    translationService.create(req.body)
+    translationService.create(req)
         .then((response) => res.send(response))
         .catch(err => next(err));
 }

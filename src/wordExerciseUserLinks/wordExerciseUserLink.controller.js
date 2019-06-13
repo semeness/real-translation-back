@@ -12,7 +12,7 @@ router.delete('/:id', _delete);
 module.exports = router;
 
 function getAll(req, res, next) {
-    wordExerciseUserLinkService.getAll()
+    wordExerciseUserLinkService.getAll(req.user.sub)
         .then((wordExerciseUserLinkList) => res.json(wordExerciseUserLinkList))
         .catch(err => next(err));
 }
